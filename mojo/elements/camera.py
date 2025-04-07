@@ -33,6 +33,7 @@ class Camera(MujocoElement):
         fovy: float = None,
         focal: np.ndarray = None,
         sensor_size: np.ndarray = None,
+        camera_name: str = None,
     ) -> Self:
         position = np.array([0, 0, 0]) if position is None else position
         quaternion = np.array([1, 0, 0, 0]) if quaternion is None else quaternion
@@ -48,6 +49,8 @@ class Camera(MujocoElement):
             camera_params["focal"] = focal
         if sensor_size:
             camera_params["sensor_size"] = sensor_size
+        if camera_name:
+            camera_params["name"] = camera_name
         new_camera = parent_mjcf.add(
             "camera", pos=position, quat=quaternion, **camera_params
         )
