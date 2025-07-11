@@ -109,6 +109,7 @@ class Mojo:
         parent: MujocoElement = None,
         on_loaded: Optional[Callable[[mjcf.RootElement], None]] = None,
         handle_freejoints: bool = False,
+        escape_separators: bool = True,
     ):
         """Load a Mujoco model from xml file and attach to specified parent element.
 
@@ -122,7 +123,7 @@ class Mojo:
         :return: A Body element representing the attached model.
         """
 
-        model_mjcf = mjcf.from_path(path)
+        model_mjcf = mjcf.from_path(path, escape_separators = escape_separators)
         if on_loaded is not None:
             on_loaded(model_mjcf)
         attach_site = self.root_element.mjcf if parent is None else parent.mjcf
